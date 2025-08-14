@@ -29,7 +29,7 @@ workflow.add_node('recommend_food', recommend_food)
 workflow.add_node('recommend_activity', recommend_activity)
 workflow.add_node('generate_search_keyword', generate_search_keyword)
 workflow.add_node('search_place', search_place)
-workflow.add_node('summarize_messages', summarize_messages)
+workflow.add_node('summarize_massage', summarize_massage)
 workflow.add_node('intent_unkown', intent_unknown)
 
 #노드를 엣지로 연결
@@ -61,9 +61,9 @@ workflow.add_edge('recommend_activity', 'generate_search_keyword')
 #generate_search_keyword : 음식/활동별로 검색해 볼만한 키워드를 생성 
 #search_place : 실제로 만든 키워드로 '카카오맵'에 장소 검색
 workflow.add_edge('generate_search_keyword', 'search_place') 
-workflow.add_edge('search_place', 'summarize_messages')
+workflow.add_edge('search_place', 'summarize_massage')
 
-workflow.add_edge('summarize_messages', END)
+workflow.add_edge('summarize_massage', END)
 workflow.add_edge('intent_unkown', END)
 
 graph = workflow.compile()

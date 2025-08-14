@@ -173,7 +173,7 @@ def search_place(state: dict) -> dict:
 
 
 # 9. 최종 메시지 생성
-def summarize_messages(state: dict) -> dict:
+def summarize_massage(state: dict) -> dict:
     item = state.get('recommend_items', ['추천'])[0]
     place = state.get('recommend_place', {})
     prompt = f"""
@@ -188,3 +188,13 @@ def summarize_messages(state: dict) -> dict:
         {'role': 'user', 'content': prompt.strip()}
     ])
     return {**state, 'final_message': response.content.strip()}
+
+
+# 10. 분류 불가 시 메시지 처리
+def intent_unknown(state: dict) -> dict:
+    """Generate a fallback message when the user's intent is unclear."""
+    message = (
+        "죄송하지만, 요청을 이해하지 못했어요. "
+        "음식이나 활동과 관련된 다른 질문을 해주세요."
+    )
+    return {**state, 'final_message': message}
